@@ -8,7 +8,6 @@ const PythonEditor = dynamic(() => import('@/components/monaco'), {
   ssr: false, // 禁用服务端渲染
 });
 
-
 const defaultSubmitText = "Get Started";
 
 export default function Home() {
