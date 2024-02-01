@@ -79,6 +79,7 @@ export default function Home() {
             </div>
           </div>
           <div style={{ height: '400px' }}>
+            {/* PythonEditor 是客户端懒加载的，所以 dom 一开始没有；这里固定一个高度避免闪 */}
             <PythonEditor isLoading={isLoading} onChange={(input: string) => setSourceCode(input)} />
           </div>
         </div>
