@@ -31,7 +31,7 @@ export default function Home() {
 
     let blob: Blob;
     try {
-      blob = await fetch("http://139.224.103.165:3000", {
+      blob = await fetch("https://pythontoexe.top:3000", {
         method: "POST",
         body: JSON.stringify({ sourceCode }),
         headers: {
