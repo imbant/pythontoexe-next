@@ -2,9 +2,13 @@ import React, { useRef, useEffect } from 'react';
 import * as monaco from 'monaco-editor';
 import { Spin } from 'antd'
 
-const PythonEditor = (props: { onChange: (input: string) => void, isLoading: boolean }) => {
+const PythonEditor = (props: { onChange: (input: string) => void, isLoading: boolean, sourceCode: string }) => {
     const editorRef = useRef(null);
     const editorInstance = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);  // 用于存储编辑器实例
+
+    useEffect(() => {
+        editorInstance.current?.setValue(props.sourceCode)
+    }, [props.sourceCode])
 
     useEffect(() => {
         if (editorRef.current) {
@@ -36,7 +40,7 @@ const PythonEditor = (props: { onChange: (input: string) => void, isLoading: boo
     return <Spin spinning={props.isLoading} style={{ height: '400px' }}>
         <div ref={editorRef} style={{ height: '400px' }} />
     </Spin>
-    
+
 };
 
 export default PythonEditor;

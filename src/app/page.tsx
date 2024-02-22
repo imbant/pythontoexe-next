@@ -2,6 +2,7 @@
 
 import { FormEventHandler, useState, useEffect } from "react";
 import dynamic from 'next/dynamic';
+import { codeMap } from "./constant";
 
 const PythonEditor = dynamic(() => import('@/components/monaco'), {
   ssr: false, // 禁用服务端渲染
@@ -62,6 +63,16 @@ export default function Home() {
     setIsLoading(false);
   };
 
+  const handleSetCode = (code: string) => {
+    console.log(111, code)
+    window.scrollTo({
+      left: 0,
+      top: 0,
+      behavior: 'smooth'
+    });
+    setSourceCode(code);
+  }
+
   return (
     <>
       <header>
@@ -82,27 +93,49 @@ export default function Home() {
           </div>
         </section>
       </header>
-      <section>
-        <div className="mx-auto max-w-7xl px-5 py-16 md:px-10 md:py-24 lg:py-32">
-          <div className="mx-auto mb-8 w-full max-w-3xl text-center md:mb-12 lg:mb-16">
-            <h1 className="mb-4 text-4xl font-bold md:text-6xl">Python to EXE: Simplify Your Coding Journey!</h1>
-            <p className="mx-auto mb-6 max-w-lg text-base text-[#636262] md:mb-10 lg:mb-12">No Tech Background? No Problem! Easily Create Standalone Applications from Your Python Scripts and Share Your Achievements with the World!</p>
-            <div className="flex items-center justify-center">
-              <a onClick={handleSubmit} href="#" className="mr-5 flex items-center bg-[#276ef1] px-8 py-4 font-semibold text-white transition [box-shadow:rgb(171,_196,245)-8px_8px] hover:[box-shadow:rgb(171,_196,_245)_0px_0px] md:mr-6 lg:mr-8">
-                <p className="mr-6 font-bold">{submitText}</p>
-              </a>
-              <a href="https://imbant.github.io/blog/about/" className="flex font-bold">
-                <p className="text-black">about author</p>
-              </a>
+      <main>
+        <section>
+          <div className="mx-auto max-w-7xl px-5 md:px-10">
+            <div className="mx-auto mb-8 w-full max-w-3xl text-center md:mb-12 lg:mb-16">
+              <h1 className="mb-4 text-4xl font-bold md:text-6xl">Python to EXE: Simplify Your Coding Journey!</h1>
+              <p className="mx-auto mb-6 max-w-lg text-base text-[#636262] md:mb-10 lg:mb-12">No Tech Background? No Problem! Easily Create Standalone Applications from Your Python Scripts and Share Your Achievements with the World!</p>
+              <div className="flex items-center justify-center">
+                <a onClick={handleSubmit} href="#" className="mr-5 flex items-center bg-[#276ef1] px-8 py-4 font-semibold text-white transition [box-shadow:rgb(171,_196,245)-8px_8px] hover:[box-shadow:rgb(171,_196,_245)_0px_0px] md:mr-6 lg:mr-8">
+                  <p className="mr-6 font-bold">{submitText}</p>
+                </a>
+                <a href="https://imbant.github.io/blog/about/" className="flex font-bold">
+                  <p className="text-black">about author</p>
+                </a>
+              </div>
+            </div>
+            <div style={{ height: '400px' }}>
+              {/* PythonEditor 是客户端懒加载的，所以 dom 一开始没有；这里固定一个高度避免闪 */}
+              <PythonEditor isLoading={isLoading} sourceCode={sourceCode} onChange={(input: string) => setSourceCode(input)} />
             </div>
           </div>
-          <div style={{ height: '400px' }}>
-            {/* PythonEditor 是客户端懒加载的，所以 dom 一开始没有；这里固定一个高度避免闪 */}
-            <PythonEditor isLoading={isLoading} onChange={(input: string) => setSourceCode(input)} />
+        </section>
+        <section>
+          <div className="mx-auto w-full max-w-7xl px-5 py-16 md:px-10">
+            <div className="grid gap-0 sm:grid-cols-2 md:grid-cols-3">
+              {...codeMap.map((item, index) => {
+                return <div key={index} onClick={() => handleSetCode(item.code)} className="flex-col flex items-start justify-between border border-[#cdcdcd] p-10 h-72 hover:bg-black hover:text-white transition">
+                  <div className="flex-row flex w-full items-center justify-between">
+                    <h5 className="text-xl font-bold">{item.title}</h5>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M6 18L18 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      </path>
+                      <path d="M8.25 6H18V15.75" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      </path>
+                    </svg>
+                  </div>
+                  <div>
+                    <p>{item.tips}</p>
+                  </div>
+                </div>
+              })}
+            </div>
           </div>
-        </div>
-      </section>
-      <main>
+        </section>
         <section>
           <div className="mx-auto w-full max-w-7xl px-5 ">
             <p className="text-center text-sm font-bold uppercase">3 easy steps</p>
@@ -133,7 +166,9 @@ export default function Home() {
             </div>
           </div>
         </section>
-      </main>
+
+
+      </main >
 
       <footer className="block">
         <div className="py-16 md:py-24 lg:py-32 mx-auto w-full max-w-7xl px-5 md:px-10">
