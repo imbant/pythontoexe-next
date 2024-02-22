@@ -65,6 +65,24 @@ export default function Home() {
   return (
     <>
       <header>
+        <section>
+          <div className="h-auto w-screen">
+            <nav className="font-inter mx-auto h-auto w-full max-w-[1600px] lg:relative lg:top-0" x-data="{isOpen: false, menuOne:false}">
+              <div className="flex flex-col px-6 py-6 lg:flex-row lg:items-center lg:justify-between lg:px-10 lg:py-4 xl:px-20">
+                <div className="mt-14 flex flex-col space-y-8 lg:mt-0 lg:flex lg:flex-row lg:space-x-1 lg:space-y-0">
+                  Python to EXE
+                </div>
+                <div className="flex flex-col space-y-8 lg:flex lg:flex-row lg:space-x-3 lg:space-y-0">
+                  <a href="https://imbant.github.io/pythontoexe_blog/" className="font-inter rounded-lg lg:px-6 lg:py-4 lg:hover:bg-gray-50 lg:hover:text-gray-800">Blog</a>
+                  <a href="https://github.com/imbant" className="font-inter rounded-lg lg:px-6 lg:py-4 lg:hover:bg-gray-50 lg:hover:text-gray-800">GitHub</a>
+                  <a href="https://imbant.github.io/blog/about/" className="font-inter rounded-lg lg:px-6 lg:py-4 lg:hover:bg-gray-50 lg:hover:text-gray-800">About</a>
+                </div>
+              </div>
+            </nav>
+          </div>
+        </section>
+      </header>
+      <section>
         <div className="mx-auto max-w-7xl px-5 py-16 md:px-10 md:py-24 lg:py-32">
           <div className="mx-auto mb-8 w-full max-w-3xl text-center md:mb-12 lg:mb-16">
             <h1 className="mb-4 text-4xl font-bold md:text-6xl">Python to EXE: Simplify Your Coding Journey!</h1>
@@ -83,7 +101,7 @@ export default function Home() {
             <PythonEditor isLoading={isLoading} onChange={(input: string) => setSourceCode(input)} />
           </div>
         </div>
-      </header>
+      </section>
       <main>
         <section>
           <div className="mx-auto w-full max-w-7xl px-5 ">
@@ -134,8 +152,9 @@ export default function Home() {
           </div>
           <div className="flex-row flex justify-between max-[991px]:items-center max-[767px]:flex-col max-[767px]:items-start max-[479px]:flex-col-reverse">
             <div className="font-semibold max-[991px]: max-[479px]:mb-4 max-[991px]:py-1 text-center sm:text-center">
-              <a href="https://imbant.github.io/blog/about/" className="inline-block font-normal text-[#636262] transition hover:text-[#d6a701] sm:pr-6 lg:pr-12 py-1.5 sm:py-2 pr-6">About</a>
+              <a href="https://imbant.github.io/pythontoexe_blog/" className="inline-block font-normal text-[#636262] transition hover:text-[#d6a701] sm:pr-6 lg:pr-12 py-1.5 sm:py-2 pr-6">Blog</a>
               <a href="https://github.com/imbant" className="inline-block font-normal text-[#636262] transition hover:text-[#d6a701] sm:pr-6 lg:pr-12 py-1.5 sm:py-2 pr-6">GitHub</a>
+              <a href="https://imbant.github.io/blog/about/" className="inline-block font-normal text-[#636262] transition hover:text-[#d6a701] sm:pr-6 lg:pr-12 py-1.5 sm:py-2 pr-6">About</a>
             </div>
             {/* <div className="max-[991px]:flex-none">
               <p className="text-[#636262] max-[479px]:text-sm">© Copyright 2021. All rights reserved.</p>
